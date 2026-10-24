@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - 'Declic-Android-Studio-v1.6.1-routine.zip'
-      - '.github/workflows/build-apk.yml'
+      - '.github/workflows/build-apk (1).yml'
 
 permissions:
   contents: read
@@ -37,6 +37,8 @@ jobs:
           project = root / 'Declic-Android-Studio-v1.6.1-routine'
           (project / 'local.properties').unlink(missing_ok=True)
           assert (project / 'app/build.gradle').is_file(), 'Projet Android introuvable'
+      - name: Configurer les outils Android
+        uses: android-actions/setup-android@v4
       - name: Installer le SDK Android
         run: sdkmanager 'platforms;android-35' 'build-tools;34.0.0'
       - name: Compiler la version de test
